@@ -1,0 +1,128 @@
+//
+// MIT License
+//
+// Copyright (c) 2021 Gwyn M. Davies
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+doctype
+html
+  include includes/header.pug
+
+  body.d-flex.flex-column.h-100
+    div.container
+      include includes/navbar.pug
+      
+      div(id="watermark")
+        p Test Automation Practice App
+
+      main
+        br
+        h3 Assertions - should be
+        br
+        br
+
+        hr
+        h4 'visible'
+        hr
+        div.container 
+          div.row 
+            div.col.col-sm-1
+              h6 btn1
+            div.col.col-sm-11
+              button(type='button' id="btn1" data-test-id="foo").btn.btn-outline-dark Click Me
+          div.row 
+            div.col
+              h6 btn2
+            div.col
+              button(type='button' id="btn2" data-test-id="foo" hidden).btn.btn-outline-dark hidden Click Me
+        hr
+        div.container 
+          div.row 
+            div.col.col-sm-1
+              h6 ul1
+            div.col.col-sm-11
+              ul(id='ul1') 
+                li() first
+                li(hidden) second
+                li() third
+          div.row 
+            div.col.col-sm-1
+              h6 ul2  
+            div.col.col-sm-11
+              ul(id='ul2') 
+                li(hidden) first
+                li(hidden) second
+                li(hidden) second
+        hr
+        h4 'checked'
+        hr
+        div.container 
+          div.row 
+            div.col.col-sm-1
+              label cb1
+            div.col.col-sm-11
+              input(type="checkbox" id="cb1" name="vehicle1" value="Bike" checked)
+          div.row 
+            div.col.col-sm-1
+              label cb2
+            div.col.col-sm-11
+              input(type="checkbox" id="cb2" name="vehicle2" value="Car")
+        hr      
+        h4 'empty'
+        hr
+        div.container 
+          div.row 
+            div.col.col-sm-1
+              h6 div1
+            div.col.col-sm-11
+              div(id='div1')
+          div.row 
+            div.col.col-sm-1
+              h6 div2
+            div.col.col-sm-11
+              div(id='div2')
+                 p Some text for div
+        hr
+        h4 'enabled' and 'disabled'
+        hr
+        div.container 
+          div.row 
+            div.col.col-sm-1
+              h6 btn3 
+            div.col.col-sm-11
+              button(type='button' id="btn3" ).btn.btn-outline-dark Click Me
+          div.row 
+            div.col.col-sm-1
+              h6 btn4 
+            div.col.col-sm-11
+              button(type='button' id="btn4" disabled).btn.btn-outline-dark Click Me
+        hr 
+        h4 'a'
+        hr
+        div.container 
+          div.row 
+            div.col.col-sm-1
+              h6 anumber
+            div.col.col-sm-11
+              input(type='number' id='anumber' value="5")
+
+      include includes/sticky-footer.pug
+
+    include includes/scripts.pug

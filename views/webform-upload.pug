@@ -1,0 +1,117 @@
+//
+// MIT License
+//
+// Copyright (c) 2021 Gwyn M. Davies
+// 
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+// 
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+doctype 5
+html
+  include includes/header.pug
+
+  body.d-flex.flex-column.h-100
+    div.container
+      include includes/navbar.pug
+      
+      div(id="watermark")
+        p Test Automation Practice App
+
+      br
+      h3 Web form - File UPLOAD
+      br
+      br
+
+      form(action="/echo-webform-file-upload" method="POST" enctype="multipart/form-data")
+        p Text:
+        input(type="text" id="text" name="text" placeholder="").form-control.w-25
+        p
+        p File:
+        input(type="file" id="file" name="file" placeholder="" onchange="fileInfo()").form-control.w-25
+        p
+        p
+        button(type="submit" id="submit" disabled).btn.btn-outline-dark Submit
+      
+      p 
+      h4(id='fileInfoHeading' style="display: none; opacity:0.5; color:#4d94ff") TBD
+      p
+      div(id="uploadFileInfo").flexcontainer
+        div.row
+          div.col-lg-4(id='uploadFileNameLabel' style="display: none; opacity:0.5; color:#4d94ff") Name:
+          div.col-lg-4(id='uploadFileName' style='opacity:0.5; color:#4d94ff')
+        div.row
+          div.col-lg-4(id='uploadFileSizelabel' style="display: none; opacity:0.5; color:#4d94ff") Size:
+          div.col-lg-4(id='uploadFileSize' style='opacity:0.5; color:#4d94ff' ) 
+        div.row
+          div.col-lg-4(id='uploadFileTypelabel' style="display: none; opacity:0.5; color:#4d94ff") Type:
+          div.col-lg-4(id='uploadFileType' style='opacity:0.5; color:#4d94ff')
+        div.row 
+        p 
+        label(id='uploadFileBase64Label' style='display: none; opacity:0.5;  color:#4d94ff') Base64: 
+        p 
+        div.row
+           div.col-lg-9(id='uploadFileBase64' style="opacity:0.5; color:#4d94ff; margin-left:20; word-wrap: break-word; height=300px; overflow: hidden;")
+
+      p
+      p
+      include includes/fixed-footer.pug
+	  
+    include includes/scripts.pug
+
+    script(type="text/javascript").
+      function fileInfo() {
+        let fileName = document.getElementById('file').files[0].name
+        let fileSize = document.getElementById('file').files[0].size
+        let fileType = document.getElementById('file').files[0].type
+        
+        if(fileType === 'text/plain'){
+          let heading = document.getElementById('fileInfoHeading')
+          heading.style.display="block"
+          heading.innerHTML = "File info - Upload Allowed for \"text/plain\""
+          document.getElementById('submit').disabled  = false
+        } else {
+          let heading = document.getElementById('fileInfoHeading')
+          heading.style.display="block"
+          heading.innerHTML = "File info - Upload NOT Allowed for \"" + fileType+ "\""
+          document.getElementById('submit').disabled  = true
+        }
+
+        document.getElementById('uploadFileNameLabel').style.display="block"
+        document.getElementById('uploadFileName').textContent = fileName
+
+        document.getElementById('uploadFileSizelabel').style.display="block"
+        document.getElementById('uploadFileSize').textContent = fileSize
+        
+        document.getElementById('uploadFileTypelabel').style.display="block"
+        document.getElementById('uploadFileType').textContent = fileType
+
+        let reader = new FileReader()
+        reader.readAsBinaryString(document.getElementById('file').files[0])
+        reader.onload = function() {
+          document.getElementById('uploadFileBase64Label').style.display="block"
+          
+          let base64Content
+
+          if(fileSize < 256) {
+            base64Content = btoa(reader.result)
+          } else {
+            base64Content = btoa(reader.result).substring(0,256) + ' ...'
+          }
+          document.getElementById('uploadFileBase64').textContent = base64Content
+        }
+      }

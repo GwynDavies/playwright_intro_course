@@ -1,0 +1,37 @@
+{
+  "name": "playwright_intro_course",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "_moduleAliases": {
+    "@pom": "lib/page-objects",
+    "@models": "app/models"
+  },
+  "scripts": {
+    "test": "npm exec playwright test",
+    "test.watch": "jest --watchAll",
+    "start": "start node server_start.js",
+    "stop": "node server_stop.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/gwyn_davies/playwright_intro_course.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/gwyn_davies/playwright_intro_course/issues"
+  },
+  "homepage": "https://gitlab.com/gwyn_davies/playwright_intro_course#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.14.1",
+    "socket.io": "^4.1.2",
+    "socket.io-client": "^4.1.2"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "module-alias": "^2.2.2",
+    "pug": "^3.0.2"
+  }
+}

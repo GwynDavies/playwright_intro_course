@@ -1,0 +1,38 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "pwa-node",
+      "request": "launch",
+      "name": "Launch Program",
+      "skipFiles": ["<node_internals>/**"],
+      "program": "${file}"
+      //"preLaunchTask": "npm: start",
+      //"postDebugTask": "npm: stop"
+    },
+    {
+      "name": "Launch this Playwright test",
+      "request": "launch",
+      "runtimeArgs": [
+        "playwright",
+        "test",
+        "--headed",
+        // When launched via run-script, any backslashes in args get doubled, breaking
+        // matching of directory paths in Windows.
+        // To match on filename only use "${fileBasename}"
+        //"foo.spec.js"
+        //"${fileBasename}"
+        //"tests\\\\modulez\\\\foo.spec.js"
+        //"${fileDirname}\\\\${fileBasename}"
+        "${fileBasename}"
+      ],
+      "runtimeExecutable": "npx",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "pwa-node",
+      "outputCapture": "std", // or "console" 
+    }
+  ]
+}
