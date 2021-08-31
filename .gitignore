@@ -1,6 +1,4 @@
 node_modules/
-*.png
-*.pdf
 screenshot_*
 reports.json
 test-results/
