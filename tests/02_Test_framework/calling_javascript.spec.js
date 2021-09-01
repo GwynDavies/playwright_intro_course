@@ -27,7 +27,7 @@
 const {HomePage} = require("../../lib/page-objects/home")
 const {test,expect} = require('@playwright/test')
 
-test.describe('Commands - Using JavaScript', () => {
+test.describe('Test framework (Calling JavaScript) - ', () => {
   let homePage
 
   test.beforeEach(async ({page}) => {
@@ -49,14 +49,12 @@ test.describe('Commands - Using JavaScript', () => {
     // Click button
     await page.click(homePage.browserTypeButton())
 
-    let c = await page.locator('span').count()
-
     // Get object's class using JavaScript - first matching span
     let spanClass = await page.$eval('#browser_div span', e => {
         return e.getAttribute('class')
     })
 
-    // First matching span should have the class - for "Chromium browser"
+    // First matching span should always have the class - for "Chromium browser"
     let spanExpectedClass  = homePage.browserChromiumLocatorClass().substring(1)
     await expect(spanClass).toBe(spanExpectedClass)
   })
@@ -73,7 +71,7 @@ test.describe('Commands - Using JavaScript', () => {
     // Click button
     await page.click(homePage.browserTypeButton())
 
-    // Get count of the number of span objects object's using JavaScript
+    // Get number of span objects object's
     let numberOfSpanObjects =  await page.$$eval('#browser_div span', objects => {
         return objects.length
     })

@@ -27,9 +27,9 @@
 const {HomePage} = require("../../lib/page-objects/home")
 const {test,expect} = require('@playwright/test')
 
-test.describe('Commands', () => {
+test.describe('Test framework (Basic test commands) - ', () => {
 
-  test("Test using commands to get an object value in different ways", async ({page, browserName}, testInfo) => {
+  test("Using different ways to get a DOM object value", async ({page, browserName}) => {
     const homePage = new HomePage()
 
     // Navigate to page
@@ -60,6 +60,7 @@ test.describe('Commands', () => {
   })
 })
 
+// DOM span objecdt locator differs by browser 
 function calculateSpanLocator(browserName, homePage){
   let spanSelector
   
