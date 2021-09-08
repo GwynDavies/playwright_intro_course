@@ -53,12 +53,12 @@ app.get('/', function (req, res) {
 })
 
 // ----------------------------------------------------------------------
-// Locators
+// Selectors
 // ----------------------------------------------------------------------
 
-app.get('/locators', function (req, res) {
+app.get('/selectors', function (req, res) {
   res = res.status(200)
-  res.render('locators')
+  res.render('selectors')
 })
 
 // ----------------------------------------------------------------------

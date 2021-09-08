@@ -1,29 +1,17 @@
-//const { chromium } = require("playwright");
-//const { TestPage } = require("@pom/test-page");
-const { TestPage } = require("../lib/page-objects/test-page");
+const { TestPage } = require("../../lib/page-objects/test-page");
 const { test, expect } = require('@playwright/test');
 const fs = require("fs");
 
 ("use strict");
 
+let testPage;
 
-test.beforeAll(async () => {
-});
-
-
-// https://playwright.dev/docs/test-configuration#configure-browser-context-videos-and-screenshots
-
-
-test.afterEach(async ({page}, testInfo, browserContext) => {
-});
-
-test.afterAll( () => {
+test.beforeEach(async ({page}) => {
+  testPage = new TestPage(page);
+  await testPage.goto();
 });
 
 test("Name field is settable and gettable", async ({page}) => {
-  const testPage = new TestPage(page);
-  await testPage.goto();
-
   const testValue = "fname lname";
 
   await testPage.setName(testValue);
@@ -53,54 +41,36 @@ test("Name field is settable and gettable", async ({page}) => {
 });
 
 test("Email field is settable and gettable", async   ({page}) => {
-  const testPage = new TestPage(page);
-  await testPage.goto();
-
   const testValue = "fname.lname@domain.com";
   await testPage.setEmail(testValue);
   expect(await testPage.getEmail()).toBe(testValue);
 });
 
 test("Password field is settable and gettable", async   ({page}) => {
-  const testPage = new TestPage(page);
-  await testPage.goto();
-
   const testValue = "secret";
   await testPage.setPassword(testValue);
   expect(await testPage.getPassword()).toBe(testValue);
 });
 
 test("Search field is settable and gettable", async   ({page}) => {
-  const testPage = new TestPage(page);
-  await testPage.goto();
-
   const testValue = "search me";
   await testPage.setSearch(testValue);
   expect(await testPage.getSearch()).toBe(testValue);
 });
 
 test("Number field is settable and gettable", async   ({page}) => {
-  const testPage = new TestPage(page);
-  await testPage.goto();
-
   const testValue = "60";
   await testPage.setNumber(testValue);
   expect(await testPage.getNumber()).toBe(testValue);
 });
 
  test("Phone field is settable and gettable", async   ({page}) => {
-   const testPage = new TestPage(page);
-   await testPage.goto();
-
    const testValue = "111-111-1111";
    await testPage.setPhone(testValue);
    expect(await testPage.getPhone()).toBe(testValue);
  });
 
 test("Date field is settable and gettable",  async ({page}) => {
-  const testPage = new TestPage(page);
-  await testPage.goto();
-
   const setValue = "01/06/2021";
   const expectedValue = "2021-01-06";
 
@@ -109,20 +79,11 @@ test("Date field is settable and gettable",  async ({page}) => {
 });
  
 test("Time field is settable and gettable",  async ({page}) => {
-  const testPage = new TestPage(page);
-  await testPage.goto();
-
-  //const setValue = "01/06/2021";
-  //const expectedValue = "2021-01-06";
-
   await testPage.setTime("10","11","PM");
   expect(await testPage.getTime()).toBe("22:11");
 });
 
 test("Checkbox fields are settable and gettable",  async ({page}) => {
-  const testPage = new TestPage(page);
-  await testPage.goto();
-
   await testPage.checkCheckBox1();
   expect(await testPage.checkBox1IsChecked()).toBe(true);
 
@@ -131,9 +92,6 @@ test("Checkbox fields are settable and gettable",  async ({page}) => {
 });
 
 test("Radio buttons are settable and gettable",  async ({page}) => {
-  const testPage = new TestPage(page);
-  await testPage.goto();
-
   await testPage.checkRadioButton1();
   expect(await testPage.radioButton1IsChecked()).toBe(true);
 
@@ -143,9 +101,6 @@ test("Radio buttons are settable and gettable",  async ({page}) => {
 });
 
 test("Selector to be settable and gettable",  async ({page}) => {
-  const testPage = new TestPage(page);
-  await testPage.goto();
-
   const testValue = "Option 1";
 
   // Initially not set
@@ -160,9 +115,6 @@ test("Selector to be settable and gettable",  async ({page}) => {
 });
 
 test("Textarea field to be settable and gettable",  async ({page}) => {
-  const testPage = new TestPage(page);
-  await testPage.goto();
-
   const testValue = "This is me.\nI am a programmer";
 
   await testPage.setTextArea(testValue);
@@ -170,43 +122,27 @@ test("Textarea field to be settable and gettable",  async ({page}) => {
 });
 
 test("Url field to be settable and gettable", async ({page}) => {
-  const testPage = new TestPage(page);
-  await testPage.goto();
-
   const testValue = "https://www.wikipedia.org";
 
   await testPage.setUrl(testValue);
   expect(await testPage.getUrl()).toBe(testValue);
 });
 
-
 test("Color field to be settable and gettable via JavaScript", async ({page}) => {
-  const testPage = new TestPage(page);
-  await testPage.goto();
-
   const testValue = "#ff0000";
 
   await testPage.setColor(testValue);
   expect(await testPage.getColor()).toBe(testValue);
 })
 
-
 test("Range field to be settable and gettable via JavaScript", async ({page}) => {
-  const testPage = new TestPage(page);
-  await testPage.goto();
-
   const testValue = "75";
 
   await testPage.setRange75();
   expect(await testPage.getRange()).toBe(testValue);
 })
 
-
-
 test("All fields are settable", async ({page}) => {
-  const testPage = new TestPage(page);
-  await testPage.goto();
-
   await testPage.setName( "fname lname")
   await testPage.setEmail("fname.lname@domain.com")
   await testPage.setPassword("secret")
@@ -228,6 +164,6 @@ test("All fields are settable", async ({page}) => {
 
   await testPage.clickSubmit()
 
-  // Wait 5 seconds so we can see the result of the GET
-  await page.waitForTimeout(5000)
+  // Pause so we can see the result of the GET
+  await page.waitForTimeout(1000)
 })
