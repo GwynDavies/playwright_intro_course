@@ -62,45 +62,6 @@ app.get('/selectors', function (req, res) {
 })
 
 // ----------------------------------------------------------------------
-// Assertions - Should
-// ----------------------------------------------------------------------
-
-app.get('/should-be', function (req, res) {
-  res = res.status(200)
-  res.render('should_be')
-})
-
-app.get('/should-have', function (req, res) {
-  res = res.status(200)
-  res.render('should_have')
-})
-
-app.get('/should-include', function (req, res) {
-  res = res.status(200)
-  res.render('should_include')
-})
-
-app.get('/should-contain', function (req, res) {
-  res = res.status(200)
-  res.render('should_contain')
-})
-
-app.get('/should-match', function (req, res) {
-  res = res.status(200)
-  res.render('should_match')
-})
-
-app.get('/should-exist', function (req, res) {
-  res = res.status(200)
-  res.render('should_exist')
-})
-
-app.get('/should-equal', function (req, res) {
-  res = res.status(200)
-  res.render('should_equal')
-})
-
-// ----------------------------------------------------------------------
 // Web forms
 // ----------------------------------------------------------------------
 
