@@ -21,38 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-const { TestPage } = require("../../lib/page-objects/webform-upload-page");
 const { test, expect } = require('@playwright/test');
-const fs = require("fs");
 
 ("use strict");
 
 test("Alert dialog is auto handled", async ({page}) => {
-  const testPage = new TestPage(page);
-  await page.goto("http://localhost:8080/dialogs");
+  await page.goto("/dialogs");
 
   await page.waitForTimeout(2000)
 
   // Click Alert
-  await page.click('#alert_button')
+  await page.click('#alert_button');
 
   // Wait so we can see the dialog was handled
-  await page.waitForTimeout(500)
+  await page.waitForTimeout(500);
 });
 
 test("Alert dialog can be handled", async ({page}) => {
-  const testPage = new TestPage(page);
-  await page.goto("http://localhost:8080/dialogs");
+  await page.goto("/dialogs");
 
+  // Handle dialog yourself
   page.on('dialog', dialog => {
-    dialog.accept()
-    console.log("Alert dialog handled")
+    dialog.accept();
+    console.log("Alert dialog handled");
   })
 
   // Click Alert
-  await page.click('#alert_button')
+  await page.click('#alert_button');
 
   // Wait so we can see the dialog was handled
-  await page.waitForTimeout(500)
+  await page.waitForTimeout(500);
 });
