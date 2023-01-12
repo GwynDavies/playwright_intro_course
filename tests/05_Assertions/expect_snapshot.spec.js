@@ -36,7 +36,7 @@ test.describe('Assertions - ', () => {
 
     // Expect some text to be visible on the page, so we know page has loaded
 
-    await expect(page.locator('text=System requirements').first()).toBeVisible()
+    await expect(page.locator('text=Getting Started').first()).toBeVisible()
 
     // Compare page screenshot with a stored snapshot
     

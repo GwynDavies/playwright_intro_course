@@ -33,11 +33,11 @@ test.describe('Assertions - ', () => {
 
     // Expect DOM element's href attribute to have expected value
 
-    await expect(page.locator('text=Get Started').first()).toHaveAttribute('href', '/docs/intro')
+    await expect(page.locator('text=Get Started')).toHaveAttribute('href', '/docs/intro')
   
     // Expect DOM element to be visible
     
-    await expect(page.locator('text=Learn more').first()).toBeVisible()
+    await expect(page.locator('text=Get Started')).toBeVisible()
   })
 
   test('DOM element text value and image src', async ({ page }) => {  
