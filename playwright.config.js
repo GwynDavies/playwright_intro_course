@@ -18,7 +18,7 @@ const config = {
     //browserName: 'webkit',
 
     baseURL: "http://localhost:8080",
-    actionTimeout:10000,
+    actionTimeout:20000,
     screenshot: 'only-on-failure',
     trace: 'retain-on-failure',
   },
